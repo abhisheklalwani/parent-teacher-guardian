@@ -42,9 +42,6 @@ export default function Home() {
               {seeds} {seeds === 1 ? "seed" : "seeds"} of positive culture
             </span>
           </p>
-          <p className="text-sm text-muted-foreground">
-            Chemistry, Period 3 &middot; 24 students
-          </p>
         </header>
 
         <div className="grid gap-4 sm:grid-cols-2">

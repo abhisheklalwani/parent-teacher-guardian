@@ -11,9 +11,9 @@ const NAV_ITEMS: {
   label: string;
   Icon: ComponentType<{ className?: string }>;
 }[] = [
-  { href: "/notes", label: "Add Notes", Icon: Mic },
-  { href: "/outreach", label: "Outreach", Icon: Mail },
-];
+    { href: "/notes", label: "Add Notes", Icon: Mic },
+    { href: "/outreach", label: "Outreach", Icon: Mail },
+  ];
 
 function LogoMark() {
   return (
@@ -57,9 +57,6 @@ export function SideNav() {
             <span className="truncate text-sm font-semibold tracking-tight text-foreground">
               BridgeAI
             </span>
-            <span className="truncate text-xs text-muted-foreground">
-              {TEACHER_NAME} · Period 3
-            </span>
           </span>
         </Link>
       </div>
@@ -73,11 +70,10 @@ export function SideNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                isActive
+              className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isActive
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
+                }`}
             >
               <item.Icon className="size-4 shrink-0" />
               {item.label}
