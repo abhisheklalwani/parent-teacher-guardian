@@ -1,27 +1,39 @@
 "use client";
 
-import { Mic } from "lucide-react";
-import { useRef, useState } from "react";
+import { Mic, Square } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Waveform } from "./Waveform";
 
-const PROMPTS = [
-  "Who surprised you today?",
-  "Who is slipping?",
-  "Any effort worth naming?",
-  "Anyone seem off?",
-] as const;
+type Status = "idle" | "recording" | "review";
+
+function formatElapsed(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const remainder = seconds % 60;
+  return `${minutes}:${remainder.toString().padStart(2, "0")}`;
+}
 
 export function AddNotes() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [elapsed, setElapsed] = useState(0);
   const [notes, setNotes] = useState("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  function appendPrompt(prompt: string) {
-    setNotes((current) => {
-      const prefix = current.trim().length > 0 ? `${current.trimEnd()}\n\n` : "";
-      return `${prefix}${prompt} `;
-    });
+  useEffect(() => {
+    if (status !== "recording") return;
+    const interval = setInterval(() => setElapsed((s) => s + 1), 1000);
+    return () => clearInterval(interval);
+  }, [status]);
+
+  function startRecording() {
+    setElapsed(0);
     setSavedAt(null);
-    textareaRef.current?.focus();
+    setStatus("recording");
+  }
+
+  function stopRecording() {
+    setStatus("review");
+    requestAnimationFrame(() => textareaRef.current?.focus());
   }
 
   function saveNotes() {
@@ -31,72 +43,92 @@ export function AddNotes() {
     );
   }
 
-  return (
-    <section className="flex flex-col gap-4">
-      <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm sm:flex-row">
-        <div className="flex shrink-0 flex-col items-center gap-2 sm:w-32">
+  if (status === "review") {
+    return (
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <span className="text-sm font-medium text-foreground">
+            Recording ({formatElapsed(elapsed)})
+          </span>
           <button
             type="button"
-            disabled
-            title="Voice notes coming soon"
-            className="flex size-16 items-center justify-center rounded-full border border-dashed border-border bg-muted text-muted-foreground opacity-70"
+            onClick={startRecording}
+            className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Mic aria-hidden="true" className="size-7" strokeWidth={1.75} />
-            <span className="sr-only">Record a voice note</span>
+            <Mic aria-hidden="true" className="size-3.5" strokeWidth={2} />
+            Record again
           </button>
-          <span className="text-center text-xs text-muted-foreground">
-            Voice notes coming soon
+        </div>
+
+        <label className="flex flex-col gap-2 text-sm">
+          <span className="sr-only">Transcript</span>
+          <textarea
+            ref={textareaRef}
+            rows={8}
+            value={notes}
+            onChange={(event) => {
+              setNotes(event.target.value);
+              setSavedAt(null);
+            }}
+            placeholder="Your transcript will appear here. Edit anything that came out wrong."
+            className="resize-y rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </label>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={saveNotes}
+            disabled={notes.trim().length === 0}
+            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Save notes
+          </button>
+          {savedAt ? (
+            <span className="text-sm text-success">Saved at {savedAt}</span>
+          ) : (
+            <span className="text-sm text-muted-foreground">
+              Nothing is sent to parents from here.
+            </span>
+          )}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="flex flex-col items-center gap-4">
+      <Waveform active={status === "recording"} />
+
+      {status === "idle" ? (
+        <button
+          type="button"
+          onClick={startRecording}
+          className="inline-flex items-center gap-3 rounded-full bg-primary px-10 py-5 text-lg font-medium text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Mic aria-hidden="true" className="size-6" strokeWidth={1.75} />
+          Start recording
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={stopRecording}
+          className="inline-flex items-center gap-3 rounded-full border border-border bg-muted px-10 py-5 text-lg font-medium text-foreground shadow-sm transition-colors hover:bg-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          <Square
+            aria-hidden="true"
+            className="size-5 fill-destructive text-destructive"
+          />
+          Stop recording
+          <span className="tabular-nums text-muted-foreground">
+            {formatElapsed(elapsed)}
           </span>
-        </div>
+        </button>
+      )}
 
-        <div className="flex min-w-0 flex-1 flex-col gap-3">
-          <div className="flex flex-wrap gap-2">
-            {PROMPTS.map((prompt) => (
-              <button
-                key={prompt}
-                type="button"
-                onClick={() => appendPrompt(prompt)}
-                className="rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {prompt}
-              </button>
-            ))}
-          </div>
-
-          <label className="flex flex-col gap-2 text-sm">
-            <span className="sr-only">Today&apos;s notes</span>
-            <textarea
-              ref={textareaRef}
-              rows={5}
-              value={notes}
-              onChange={(event) => {
-                setNotes(event.target.value);
-                setSavedAt(null);
-              }}
-              placeholder="Jonah worked alone again today. Amara led her lab group start to finish."
-              className="resize-y rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            />
-          </label>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <button
-              type="button"
-              onClick={saveNotes}
-              disabled={notes.trim().length === 0}
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Save notes
-            </button>
-            {savedAt ? (
-              <span className="text-sm text-success">Saved at {savedAt}</span>
-            ) : (
-              <span className="text-sm text-muted-foreground">
-                Nothing is sent to parents from here.
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
+      {status === "recording" ? (
+        <p className="text-sm text-muted-foreground">Listening. Take your time.</p>
+      ) : null}
     </section>
   );
 }
