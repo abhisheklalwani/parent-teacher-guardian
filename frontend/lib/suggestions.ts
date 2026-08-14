@@ -9,6 +9,7 @@ export type Suggestion = {
   subject: string;
   draft: string;
   guardianName: string;
+  guardianEmail: string;
 };
 
 /** Synthetic students only. No real student data anywhere in this project. */
@@ -26,6 +27,7 @@ export const MOCK_SUGGESTIONS: Suggestion[] = [
     ],
     subject: "A good week for Amara in Chemistry",
     guardianName: "Ms. Okafor",
+    guardianEmail: "guardian.okafor@example.com",
     draft: `Hi Ms. Okafor,
 
 Quick note with some good news. Amara took the lead in her lab group this week during our titration unit, and she presented her group's findings to the class twice. She also stopped to walk two classmates through a calculation they were stuck on.
@@ -48,6 +50,7 @@ Ms. Rivera`,
     ],
     subject: "Checking in about Daniel and this algebra unit",
     guardianName: "Mr. Reyes",
+    guardianEmail: "guardian.reyes@example.com",
     draft: `Hi Mr. Reyes,
 
 I wanted to reach out early rather than wait. Daniel's last two quizzes came in at 61% and 54%, and in both cases the points were lost on the same step: distributing before combining like terms. He understands the setup, so this is a fixable habit rather than a gap in the whole unit.
@@ -72,6 +75,7 @@ Ms. Rivera`,
     ],
     subject: "Something has shifted for Priya -- do you know why?",
     guardianName: "Mrs. Raman",
+    guardianEmail: "guardian.raman@example.com",
     draft: `Hi Mrs. Raman,
 
 I noticed something and wanted to ask rather than assume. Priya turned in every assignment on time through October, and over the last two weeks three have come in missing. She's also been late to first period twice, which hadn't happened before.
@@ -94,6 +98,7 @@ Ms. Rivera`,
     ],
     subject: "Marcus put in real work on his essay revision",
     guardianName: "Ms. Bell",
+    guardianEmail: "guardian.bell@example.com",
     draft: `Hi Ms. Bell,
 
 I wanted to name something Marcus did this week. After our writing conference he rewrote his essay on his own, which I hadn't required, and came to office hours to ask how to make his counterargument stronger. His revised draft moved from a 2 to a 4 on the evidence strand of the rubric.
@@ -116,6 +121,7 @@ Ms. Rivera`,
     ],
     subject: "One thing that would move Sofia's writing grade",
     guardianName: "Mr. Delgado",
+    guardianEmail: "guardian.delgado@example.com",
     draft: `Hi Mr. Delgado,
 
 Sofia's reading comprehension is genuinely strong, all of her checks this unit were above 90%, and she's one of the more confident voices in discussion. Where she's losing points is narrower than it looks: she picks a good quote and then stops, without explaining what it proves.
@@ -138,6 +144,7 @@ Ms. Rivera`,
     ],
     subject: "A change I noticed with Jonah",
     guardianName: "Mr. and Mrs. Whitfield",
+    guardianEmail: "guardian.whitfield@example.com",
     draft: `Hi Mr. and Mrs. Whitfield,
 
 Jonah's grades are steady, so this isn't an academic note. I noticed he's asked to work independently on the last three group tasks and has been sitting apart from his usual table group since last Thursday. Before that he was one of the students who pulled a group together.
