@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Mic, Sprout } from "lucide-react";
+import { Clock, Mail, Mic, Sprout } from "lucide-react";
 import { useSyncExternalStore } from "react";
 import {
   BASELINE_SEEDS,
@@ -49,12 +49,18 @@ export default function Home() {
             href="/notes"
             className="flex flex-col gap-3 rounded-lg border border-border bg-card/90 p-6 text-card-foreground shadow-sm backdrop-blur-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-              <Mic className="size-5" />
+            <span className="inline-flex items-center gap-2.5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Mic className="size-4.5" />
+              </span>
+              <span className="text-lg font-semibold">Add Notes</span>
             </span>
-            <span className="text-lg font-semibold">Add Notes</span>
             <span className="text-sm text-muted-foreground">
-              Record what you noticed about students today.
+              Brain dump what you noticed about your students today.
+            </span>
+            <span className="mt-auto inline-flex items-center gap-1.5 pt-1 text-xs font-medium text-muted-foreground">
+              <Clock aria-hidden="true" className="size-3.5" strokeWidth={2} />
+              3 minutes
             </span>
           </Link>
 
@@ -62,12 +68,18 @@ export default function Home() {
             href="/outreach"
             className="flex flex-col gap-3 rounded-lg border border-border bg-card/90 p-6 text-card-foreground shadow-sm backdrop-blur-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-              <Mail className="size-5" />
+            <span className="inline-flex items-center gap-2.5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <Mail className="size-4.5" />
+              </span>
+              <span className="text-lg font-semibold">Outreach</span>
             </span>
-            <span className="text-lg font-semibold">Outreach</span>
             <span className="text-sm text-muted-foreground">
               Review and send suggested parent communications.
+            </span>
+            <span className="mt-auto inline-flex items-center gap-1.5 pt-1 text-xs font-medium text-muted-foreground">
+              <Clock aria-hidden="true" className="size-3.5" strokeWidth={2} />
+              10 minutes
             </span>
           </Link>
         </div>
