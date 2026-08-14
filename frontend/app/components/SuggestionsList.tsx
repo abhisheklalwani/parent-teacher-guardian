@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { plantSeed } from "@/lib/seeds";
 import type { Suggestion } from "@/lib/suggestions";
 import { SuggestionCard } from "./SuggestionCard";
 
@@ -85,11 +86,11 @@ export function SuggestionsList() {
                 key={suggestion.id}
                 suggestion={suggestion}
                 isApproved={approvedIds.includes(suggestion.id)}
-                onApprove={() =>
-                  setApprovedIds((ids) =>
-                    ids.includes(suggestion.id) ? ids : [...ids, suggestion.id],
-                  )
-                }
+                onApprove={() => {
+                  if (approvedIds.includes(suggestion.id)) return;
+                  if (suggestion.type === "positive") plantSeed();
+                  setApprovedIds((ids) => [...ids, suggestion.id]);
+                }}
                 onSkip={() =>
                   setSkippedIds((ids) =>
                     ids.includes(suggestion.id) ? ids : [...ids, suggestion.id],
