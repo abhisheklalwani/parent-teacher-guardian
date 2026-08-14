@@ -2,7 +2,7 @@
 
 :root {
   /* Surfaces */
-  --background: #f7f9fb;
+  --background: #eaf2f2;
   --foreground: #1a2332;
   --card: #ffffff;
   --card-foreground: #1a2332;
@@ -54,7 +54,26 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(
+      60rem 38rem at 6% 2%,
+      color-mix(in oklab, var(--primary) 34%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      45rem 30rem at 96% 8%,
+      color-mix(in oklab, var(--accent) 22%, transparent),
+      transparent 58%
+    ),
+    radial-gradient(
+      50rem 34rem at 70% 100%,
+      color-mix(in oklab, var(--primary) 22%, transparent),
+      transparent 62%
+    );
+  /* Fixed so the wash reads as one surface instead of scrolling with content. */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }

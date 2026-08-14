@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { Mail, Mic } from "lucide-react";
 import { usePathname } from "next/navigation";
+import type { ComponentType } from "react";
 
-const NAV_ITEMS = [
-  { href: "/notes", label: "Add Notes" },
-  { href: "/outreach", label: "Outreach" },
-] as const;
+const NAV_ITEMS: {
+  href: string;
+  label: string;
+  Icon: ComponentType<{ className?: string }>;
+}[] = [
+  { href: "/notes", label: "Add Notes", Icon: Mic },
+  { href: "/outreach", label: "Outreach", Icon: Mail },
+];
 
 function LogoMark() {
   return (
@@ -30,7 +36,7 @@ export function SideNav() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card">
+    <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card/70 backdrop-blur-sm">
       <div className="border-b border-border px-4 py-5">
         <Link
           href="/"
@@ -57,12 +63,13 @@ export function SideNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
+              <item.Icon className="size-4 shrink-0" />
               {item.label}
             </Link>
           );

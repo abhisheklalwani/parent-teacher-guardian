@@ -1,5 +1,6 @@
 "use client";
 
+import { Mic } from "lucide-react";
 import { useRef, useState } from "react";
 
 const PROMPTS = [
@@ -8,25 +9,6 @@ const PROMPTS = [
   "Any effort worth naming?",
   "Anyone seem off?",
 ] as const;
-
-function MicIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="size-7"
-    >
-      <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z" />
-      <path d="M5 11v1a7 7 0 0 0 14 0v-1" />
-      <path d="M12 19v2" />
-    </svg>
-  );
-}
 
 export function AddNotes() {
   const [notes, setNotes] = useState("");
@@ -59,7 +41,7 @@ export function AddNotes() {
             title="Voice notes coming soon"
             className="flex size-16 items-center justify-center rounded-full border border-dashed border-border bg-muted text-muted-foreground opacity-70"
           >
-            <MicIcon />
+            <Mic aria-hidden="true" className="size-7" strokeWidth={1.75} />
             <span className="sr-only">Record a voice note</span>
           </button>
           <span className="text-center text-xs text-muted-foreground">

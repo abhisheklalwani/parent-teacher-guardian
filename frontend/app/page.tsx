@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, Mic } from "lucide-react";
 
 export default function Home() {
   return (
@@ -15,8 +16,11 @@ export default function Home() {
       <div className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/notes"
-          className="flex flex-col gap-2 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex flex-col gap-3 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
+          <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Mic className="size-5" />
+          </span>
           <span className="text-lg font-semibold">Add Notes</span>
           <span className="text-sm text-muted-foreground">
             Record what you noticed about students today.
@@ -25,8 +29,11 @@ export default function Home() {
 
         <Link
           href="/outreach"
-          className="flex flex-col gap-2 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex flex-col gap-3 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
+          <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+            <Mail className="size-5" />
+          </span>
           <span className="text-lg font-semibold">Outreach</span>
           <span className="text-sm text-muted-foreground">
             Review and send suggested parent communications.
