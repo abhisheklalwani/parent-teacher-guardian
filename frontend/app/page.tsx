@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Mic } from "lucide-react";
+import { Mail, Mic, Sprout } from "lucide-react";
 import { useSyncExternalStore } from "react";
 import {
   BASELINE_SEEDS,
@@ -35,10 +35,12 @@ export default function Home() {
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Welcome, {TEACHER_NAME}
           </h1>
-          <p className="max-w-md text-muted-foreground">
-            You&apos;ve planted{" "}
-            <span className="font-semibold text-success">{seeds}</span>{" "}
-            {seeds === 1 ? "seed" : "seeds"} of positive culture
+          <p className="inline-flex max-w-md flex-wrap items-center justify-center gap-x-1.5 text-muted-foreground">
+            <span>You&apos;ve planted</span>
+            <span className="inline-flex items-center gap-1 font-semibold text-success">
+              <Sprout aria-hidden="true" className="size-4" strokeWidth={2} />
+              {seeds} {seeds === 1 ? "seed" : "seeds"} of positive culture
+            </span>
           </p>
           <p className="text-sm text-muted-foreground">
             Chemistry, Period 3 &middot; 24 students
