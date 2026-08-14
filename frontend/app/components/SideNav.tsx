@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Mail, Mic } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ComponentType } from "react";
+import { TEACHER_NAME } from "@/lib/seeds";
 
 const NAV_ITEMS: {
   href: string;
@@ -48,7 +49,7 @@ export function SideNav() {
               Parent Teacher Guardian
             </span>
             <span className="truncate text-xs text-muted-foreground">
-              Ms. Rivera · Period 3
+              {TEACHER_NAME} · Period 3
             </span>
           </span>
         </Link>

@@ -1,45 +1,78 @@
+"use client";
+
 import Link from "next/link";
 import { Mail, Mic } from "lucide-react";
+import { useSyncExternalStore } from "react";
+import {
+  BASELINE_SEEDS,
+  getSeedCount,
+  TEACHER_NAME,
+} from "@/lib/seeds";
+import { SeedGarden } from "./components/SeedGarden";
+
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener("ptg:seeds-changed", onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+  return () => {
+    window.removeEventListener("ptg:seeds-changed", onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+  };
+}
 
 export default function Home() {
+  const seeds = useSyncExternalStore(
+    subscribe,
+    getSeedCount,
+    () => BASELINE_SEEDS,
+  );
+
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-10 px-6 py-16 font-sans">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          End of day review
-        </h1>
-        <p className="text-muted-foreground">
-          Ms. Rivera &middot; Chemistry, Period 3 &middot; 24 students
-        </p>
-      </header>
+    <div className="relative flex min-h-full flex-1 flex-col">
+      <SeedGarden count={seeds} />
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Link
-          href="/notes"
-          className="flex flex-col gap-3 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-            <Mic className="size-5" />
-          </span>
-          <span className="text-lg font-semibold">Add Notes</span>
-          <span className="text-sm text-muted-foreground">
-            Record what you noticed about students today.
-          </span>
-        </Link>
+      <main className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col justify-center gap-10 px-6 py-16 font-sans">
+        <header className="flex flex-col items-center gap-2 text-center">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            Welcome, {TEACHER_NAME}
+          </h1>
+          <p className="max-w-md text-muted-foreground">
+            You&apos;ve planted{" "}
+            <span className="font-semibold text-success">{seeds}</span>{" "}
+            {seeds === 1 ? "seed" : "seeds"} of positive culture
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Chemistry, Period 3 &middot; 24 students
+          </p>
+        </header>
 
-        <Link
-          href="/outreach"
-          className="flex flex-col gap-3 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
-            <Mail className="size-5" />
-          </span>
-          <span className="text-lg font-semibold">Outreach</span>
-          <span className="text-sm text-muted-foreground">
-            Review and send suggested parent communications.
-          </span>
-        </Link>
-      </div>
-    </main>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/notes"
+            className="flex flex-col gap-3 rounded-lg border border-border bg-card/90 p-6 text-card-foreground shadow-sm backdrop-blur-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+              <Mic className="size-5" />
+            </span>
+            <span className="text-lg font-semibold">Add Notes</span>
+            <span className="text-sm text-muted-foreground">
+              Record what you noticed about students today.
+            </span>
+          </Link>
+
+          <Link
+            href="/outreach"
+            className="flex flex-col gap-3 rounded-lg border border-border bg-card/90 p-6 text-card-foreground shadow-sm backdrop-blur-sm transition-colors hover:border-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+              <Mail className="size-5" />
+            </span>
+            <span className="text-lg font-semibold">Outreach</span>
+            <span className="text-sm text-muted-foreground">
+              Review and send suggested parent communications.
+            </span>
+          </Link>
+        </div>
+      </main>
+    </div>
   );
 }
