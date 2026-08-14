@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Parent Teacher Guardian",
+  title: "BridgeAI",
   description:
     "End of day review queue: teacher notes in, suggested parent communications out.",
 };

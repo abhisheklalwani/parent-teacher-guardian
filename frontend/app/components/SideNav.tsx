@@ -21,13 +21,22 @@ function LogoMark() {
       aria-hidden="true"
       className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground"
     >
-      <svg viewBox="0 0 24 24" fill="none" className="size-4">
-        <path
-          d="M12 3.5 4.5 7.5v4c0 4.5 3.2 7.8 7.5 9 4.3-1.2 7.5-4.5 7.5-9v-4L12 3.5Z"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="size-4"
+      >
+        {/* Suspension cables: edge to tower, sagging between the towers */}
+        <path d="M2 9.5C4.9 9.5 7 7.4 7 4" />
+        <path d="M7 4c0 4 2.2 6.2 5 6.2s5-2.2 5-6.2" />
+        <path d="M17 4c0 3.4 2.1 5.5 5 5.5" />
+        {/* Towers and deck */}
+        <path d="M7 4v17M17 4v17" />
+        <path d="M2 15.5h20" />
       </svg>
     </span>
   );
@@ -46,7 +55,7 @@ export function SideNav() {
           <LogoMark />
           <span className="flex min-w-0 flex-col">
             <span className="truncate text-sm font-semibold tracking-tight text-foreground">
-              Parent Teacher Guardian
+              BridgeAI
             </span>
             <span className="truncate text-xs text-muted-foreground">
               {TEACHER_NAME} · Period 3
