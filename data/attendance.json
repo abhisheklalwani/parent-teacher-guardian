@@ -1,0 +1,136 @@
+{
+  "class_id": "ALG2-P3-2627",
+  "reporting_period": {
+    "start": "2026-09-01",
+    "end": "2026-11-20",
+    "total_days": 57
+  },
+  "records": [
+    {
+      "student_id": "S01",
+      "absences_excused": 1,
+      "absences_unexcused": 0,
+      "tardies": 0,
+      "events": [
+        { "date": "2026-10-14", "type": "absence", "excused": true, "reason": "Medical appointment" }
+      ]
+    },
+    {
+      "student_id": "S02",
+      "absences_excused": 0,
+      "absences_unexcused": 6,
+      "tardies": 3,
+      "events": [
+        { "date": "2026-09-11", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-22", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-01", "type": "tardy",   "excused": false, "minutes_late": 12 },
+        { "date": "2026-10-08", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-16", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-22", "type": "tardy",   "excused": false, "minutes_late": 8 },
+        { "date": "2026-11-04", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-11-11", "type": "tardy",   "excused": false, "minutes_late": 15 },
+        { "date": "2026-11-18", "type": "absence", "excused": false, "reason": null }
+      ]
+    },
+    {
+      "student_id": "S03",
+      "absences_excused": 2,
+      "absences_unexcused": 0,
+      "tardies": 1,
+      "events": [
+        { "date": "2026-09-29", "type": "absence", "excused": true,  "reason": "Family obligation" },
+        { "date": "2026-10-26", "type": "tardy",   "excused": false, "minutes_late": 5 },
+        { "date": "2026-11-10", "type": "absence", "excused": true,  "reason": "Illness" }
+      ]
+    },
+    {
+      "student_id": "S04",
+      "absences_excused": 0,
+      "absences_unexcused": 0,
+      "tardies": 0,
+      "events": []
+    },
+    {
+      "student_id": "S05",
+      "absences_excused": 1,
+      "absences_unexcused": 0,
+      "tardies": 5,
+      "events": [
+        { "date": "2026-09-15", "type": "tardy",   "excused": false, "minutes_late": 7 },
+        { "date": "2026-09-30", "type": "tardy",   "excused": false, "minutes_late": 10 },
+        { "date": "2026-10-07", "type": "absence", "excused": true,  "reason": "School activity" },
+        { "date": "2026-10-20", "type": "tardy",   "excused": false, "minutes_late": 6 },
+        { "date": "2026-11-03", "type": "tardy",   "excused": false, "minutes_late": 9 },
+        { "date": "2026-11-17", "type": "tardy",   "excused": false, "minutes_late": 14 }
+      ]
+    },
+    {
+      "student_id": "S06",
+      "absences_excused": 2,
+      "absences_unexcused": 4,
+      "tardies": 2,
+      "events": [
+        { "date": "2026-09-18", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-25", "type": "tardy",   "excused": false, "minutes_late": 11 },
+        { "date": "2026-10-09", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-16", "type": "absence", "excused": true,  "reason": "Illness" },
+        { "date": "2026-10-28", "type": "tardy",   "excused": false, "minutes_late": 8 },
+        { "date": "2026-11-06", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-11-13", "type": "absence", "excused": true,  "reason": "Medical appointment" }
+      ]
+    },
+    {
+      "student_id": "S07",
+      "absences_excused": 1,
+      "absences_unexcused": 0,
+      "tardies": 1,
+      "events": [
+        { "date": "2026-10-05", "type": "tardy",   "excused": false, "minutes_late": 4 },
+        { "date": "2026-11-03", "type": "absence", "excused": true,  "reason": "College visit" }
+      ]
+    },
+    {
+      "student_id": "S08",
+      "absences_excused": 2,
+      "absences_unexcused": 10,
+      "tardies": 4,
+      "events": [
+        { "date": "2026-09-04", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-08", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-09", "type": "tardy",   "excused": false, "minutes_late": 18 },
+        { "date": "2026-09-11", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-16", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-18", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-09-25", "type": "tardy",   "excused": false, "minutes_late": 20 },
+        { "date": "2026-10-01", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-09", "type": "absence", "excused": true,  "reason": "Illness" },
+        { "date": "2026-10-14", "type": "tardy",   "excused": false, "minutes_late": 10 },
+        { "date": "2026-10-16", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-10-28", "type": "absence", "excused": true,  "reason": "Illness" },
+        { "date": "2026-11-05", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-11-12", "type": "absence", "excused": false, "reason": null },
+        { "date": "2026-11-18", "type": "tardy",   "excused": false, "minutes_late": 22 },
+        { "date": "2026-11-19", "type": "absence", "excused": false, "reason": null }
+      ]
+    },
+    {
+      "student_id": "S09",
+      "absences_excused": 1,
+      "absences_unexcused": 0,
+      "tardies": 0,
+      "events": [
+        { "date": "2026-11-06", "type": "absence", "excused": true,  "reason": "Family obligation" }
+      ]
+    },
+    {
+      "student_id": "S10",
+      "absences_excused": 0,
+      "absences_unexcused": 0,
+      "tardies": 2,
+      "events": [
+        { "date": "2026-09-24", "type": "tardy",   "excused": false, "minutes_late": 6 },
+        { "date": "2026-10-29", "type": "tardy",   "excused": false, "minutes_late": 5 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "class_id": "ALG2-P3-2627",
+  "assignments": [
+    { "id": "HW01", "type": "homework",  "title": "Intro to Polynomials",             "max_points": 100, "due_date": "2026-09-04" },
+    { "id": "HW02", "type": "homework",  "title": "Factoring Basics",                 "max_points": 100, "due_date": "2026-09-11" },
+    { "id": "Q01",  "type": "quiz",      "title": "Quiz 1 – Polynomials",             "max_points": 50,  "due_date": "2026-09-08" },
+    { "id": "HW03", "type": "homework",  "title": "Solving Quadratic Equations",      "max_points": 100, "due_date": "2026-09-18" },
+    { "id": "Q02",  "type": "quiz",      "title": "Quiz 2 – Factoring",               "max_points": 50,  "due_date": "2026-09-22" },
+    { "id": "T01",  "type": "test",      "title": "Unit 1 Test – Polynomials",        "max_points": 100, "due_date": "2026-10-01" },
+    { "id": "HW04", "type": "homework",  "title": "Rational Expressions",             "max_points": 100, "due_date": "2026-10-09" },
+    { "id": "Q03",  "type": "quiz",      "title": "Quiz 3 – Rational Expressions",    "max_points": 50,  "due_date": "2026-10-13" },
+    { "id": "HW05", "type": "homework",  "title": "Radical Functions",                "max_points": 100, "due_date": "2026-10-16" },
+    { "id": "T02",  "type": "test",      "title": "Unit 2 Test – Rational & Radical", "max_points": 100, "due_date": "2026-10-27" },
+    { "id": "P01",  "type": "project",   "title": "Midterm Project",                  "max_points": 150, "due_date": "2026-11-13" },
+    { "id": "MT",   "type": "midterm",   "title": "Midterm Exam",                     "max_points": 200, "due_date": "2026-11-20" }
+  ],
+  "grades": [
+    {
+      "student_id": "S01",
+      "scores": {
+        "HW01": 95, "HW02": 98, "Q01": 44,
+        "HW03": 92, "Q02": 48, "T01": 94,
+        "HW04": 97, "Q03": 47, "HW05": 96,
+        "T02": 91, "P01": 147, "MT": 192
+      }
+    },
+    {
+      "student_id": "S02",
+      "scores": {
+        "HW01": 80, "HW02": null, "Q01": 36,
+        "HW03": 75, "Q02": null, "T01": 68,
+        "HW04": 78, "Q03": 35, "HW05": null,
+        "T02": 65, "P01": 123, "MT": 142
+      },
+      "notes": "null scores indicate missing work due to unexcused absence"
+    },
+    {
+      "student_id": "S03",
+      "scores": {
+        "HW01": 60, "HW02": 55, "Q01": 26,
+        "HW03": 58, "Q02": 31, "T01": 49,
+        "HW04": 63, "Q03": 28, "HW05": 57,
+        "T02": 51, "P01": 98, "MT": 108
+      }
+    },
+    {
+      "student_id": "S04",
+      "scores": {
+        "HW01": 100, "HW02": 97, "Q01": 48,
+        "HW03": 99, "Q02": 49, "T01": 97,
+        "HW04": 100, "Q03": 48, "HW05": 98,
+        "T02": 99, "P01": 150, "MT": 196
+      }
+    },
+    {
+      "student_id": "S05",
+      "scores": {
+        "HW01": 85, "HW02": 70, "Q01": 40,
+        "HW03": 88, "Q02": 33, "T01": 78,
+        "HW04": 90, "Q03": 38, "HW05": 60,
+        "T02": 82, "P01": 128, "MT": 158
+      }
+    },
+    {
+      "student_id": "S06",
+      "scores": {
+        "HW01": 72, "HW02": 68, "Q01": 33,
+        "HW03": null, "Q02": 35, "T01": 61,
+        "HW04": null, "Q03": 32, "HW05": 66,
+        "T02": 58, "P01": 108, "MT": 128
+      },
+      "notes": "null scores indicate missing work due to unexcused absence"
+    },
+    {
+      "student_id": "S07",
+      "scores": {
+        "HW01": 92, "HW02": 90, "Q01": 45,
+        "HW03": 94, "Q02": 47, "T01": 91,
+        "HW04": 95, "Q03": 44, "HW05": 92,
+        "T02": 90, "P01": 141, "MT": 184
+      }
+    },
+    {
+      "student_id": "S08",
+      "scores": {
+        "HW01": 55, "HW02": null, "Q01": null,
+        "HW03": 58, "Q02": 26, "T01": 45,
+        "HW04": 60, "Q03": 25, "HW05": null,
+        "T02": 43, "P01": 87, "MT": 98
+      },
+      "notes": "null scores indicate missing work due to unexcused absence"
+    },
+    {
+      "student_id": "S09",
+      "scores": {
+        "HW01": 88, "HW02": 92, "Q01": 43,
+        "HW03": 90, "Q02": 46, "T01": 89,
+        "HW04": 93, "Q03": 44, "HW05": 90,
+        "T02": 88, "P01": 138, "MT": 180
+      }
+    },
+    {
+      "student_id": "S10",
+      "scores": {
+        "HW01": 90, "HW02": 88, "Q01": 43,
+        "HW03": 92, "Q02": 45, "T01": 88,
+        "HW04": 91, "Q03": 44, "HW05": 89,
+        "T02": 90, "P01": 140, "MT": 182
+      }
+    }
+  ]
+}
