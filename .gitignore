@@ -1,1 +1,5 @@
-api_key.env
+node_modules/
+.DS_Store
+*.pem
+.env*
+!.env.example
