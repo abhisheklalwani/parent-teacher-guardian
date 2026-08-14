@@ -51,13 +51,6 @@ export function AddNotes() {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <h2 className="text-lg font-semibold text-foreground">Add notes</h2>
-        <p className="text-sm text-muted-foreground">
-          Two minutes on what you noticed today. These feed the suggestions below.
-        </p>
-      </div>
-
       <div className="flex flex-col gap-5 rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm sm:flex-row">
         <div className="flex shrink-0 flex-col items-center gap-2 sm:w-32">
           <button

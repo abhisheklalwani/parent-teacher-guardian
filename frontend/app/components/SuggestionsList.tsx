@@ -40,22 +40,11 @@ export function SuggestionsList() {
 
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-end justify-between gap-2">
-        <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold text-foreground">
-            Suggested parent communications
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Drafted from this week&apos;s gradebook, attendance, and your notes.
-            Nothing sends without your approval.
-          </p>
-        </div>
-        {state === "loaded" && (
-          <span className="text-sm text-muted-foreground">
-            {remaining} waiting on you
-          </span>
-        )}
-      </div>
+      {state === "loaded" && (
+        <p className="text-sm text-muted-foreground">
+          {remaining} waiting on you
+        </p>
+      )}
 
       {state === "loading" && (
         <div className="grid gap-4 md:grid-cols-2">
