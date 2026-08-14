@@ -1,0 +1,74 @@
+{
+  "generated_at": "2026-11-20T16:00:00Z",
+  "class": {
+    "name": "Algebra II",
+    "period": "3",
+    "teacher": "Ms. Rivera"
+  },
+  "students_to_contact": [
+    {
+      "student_id": "S01",
+      "student_name": "Maya Chen",
+      "message_type": "positive_noticing",
+      "contact_reason": "Maya maintains a high academic standing (95.1% A) and demonstrated exceptional creativity on her midterm project by modeling loan amortization with quadratic curves.",
+      "draft_subject": "Positive Noticing: Maya's Outstanding Work in Algebra II",
+      "draft_body": "Dear Parent/Guardian of Maya,\n\nI am writing to share how impressed I am with Maya's performance in Algebra II this semester. She currently holds an A in the class and consistently demonstrates an exceptional understanding of our course material. I was particularly impressed by her midterm project, where she creatively applied quadratic curves to model loan amortization. Thank you for supporting Maya at home, and please feel free to reach out if you ever have any questions.\n\n— Ms. Rivera, Algebra II Period 3 | [school email]"
+    },
+    {
+      "student_id": "S02",
+      "student_name": "Jaylen Brooks",
+      "message_type": "intervention_needed",
+      "contact_reason": "Jaylen's grade has fallen to 58.5% (F) due to three missing assignments and six unexcused absences, despite demonstrating strong subject mastery when present in class.",
+      "draft_subject": "Partnering for Jaylen's Success in Algebra II",
+      "draft_body": "Dear Parent/Guardian of Jaylen,\n\nI am reaching out to partner with you regarding Jaylen's progress in Algebra II, where his grade is currently at 58.5% (F). Jaylen has demonstrated strong algebra skills and grasps new concepts quickly when he is in class, but recent absences have led to three missing assignments that are pulling down his overall score. Specifically, he has missing entries for Homework 02, Quiz 2, and Homework 05, as well as six unexcused absences this reporting period. With consistent attendance and by turning in these missing items, Jaylen has the capability to significantly improve his grade before the semester ends. To support him at home, I suggest setting aside a consistent 20-minute daily study block to review his online portal and complete any pending make-up work. Please let me know if you would like to schedule a quick call to discuss how we can best support Jaylen together.\n\n— Ms. Rivera, Algebra II Period 3 | [school email]"
+    },
+    {
+      "student_id": "S05",
+      "student_name": "Marcus Bell",
+      "message_type": "positive_noticing",
+      "contact_reason": "Marcus has shown strong momentum this month, reducing tardiness and improving his quiz and exam scores, showing increased consistency and focus.",
+      "draft_subject": "Celebrating Marcus's Great Progress in Algebra II",
+      "draft_body": "Dear Parent/Guardian of Marcus,\n\nI wanted to share a quick note to celebrate Marcus's recent positive momentum in Algebra II. Over the past month, Marcus has shown great focus, significantly improved his punctuality to class, and earned a strong score on his latest quiz and midterm exam. His consistent effort on recent classwork and exams is clearly paying off and reflects his true potential in mathematics. Thank you for your continued encouragement at home as Marcus builds on this fantastic progress.\n\n— Ms. Rivera, Algebra II Period 3 | [school email]"
+    },
+    {
+      "student_id": "S08",
+      "student_name": "Grace Thompson",
+      "message_type": "intervention_needed",
+      "contact_reason": "Grace's grade is at 41.4% (F) due to 10 unexcused absences and three missing assignments, though her midterm project demonstrated clear academic capability when work is completed.",
+      "draft_subject": "Support Plan for Grace in Algebra II",
+      "draft_body": "Dear Parent/Guardian of Grace,\n\nI am writing to reach out regarding Grace's academic standing in Algebra II, where her grade currently sits at 41.4% (F). Grace recently submitted her midterm project, and her work showed a clear, solid understanding of the mathematical concepts we are covering. However, her overall score is being heavily impacted by 10 unexcused absences and three missing assignments. Because daily instruction builds directly on prior lessons, regular attendance is critical for her to stay on track and demonstrate what she knows. I am confident that with regular class attendance and submission of overdue work, Grace can make substantial progress toward a passing grade. At home, a great step would be to review her weekly assignment tracker together each Sunday evening to plan out her schedule and confirm upcoming due dates.\n\n— Ms. Rivera, Algebra II Period 3 | [school email]"
+    }
+  ],
+  "students_not_contacted": [
+    {
+      "student_id": "S03",
+      "student_name": "Ethan Whitfield",
+      "reason_skipped": "Ethan has zero missing assignments and is actively engaged in test preparation and one-on-one review in class, so outreach is deferred while internal academic supports are underway."
+    },
+    {
+      "student_id": "S04",
+      "student_name": "Sofia Ramirez",
+      "reason_skipped": "Sofia is maintaining an outstanding 98.4% average with perfect attendance and consistent top performance, requiring no targeted outreach this week."
+    },
+    {
+      "student_id": "S06",
+      "student_name": "Aaliyah Foster",
+      "reason_skipped": "Aaliyah is scheduled for a multi-party support check-in, so individual outreach will be coordinated following that meeting."
+    },
+    {
+      "student_id": "S07",
+      "student_name": "Noah Kaplan",
+      "reason_skipped": "Noah continues to perform steadily at a 92.1% A average with complete assignments and strong academic initiative."
+    },
+    {
+      "student_id": "S09",
+      "student_name": "Diego Alvarez",
+      "reason_skipped": "Diego remains a highly steady performer with a 90.1% average and zero missing assignments, requiring no outreach at this time."
+    },
+    {
+      "student_id": "S10",
+      "student_name": "Priya Patel",
+      "reason_skipped": "Priya maintains a solid 90.2% A average and is collaborating constructively in study groups, showing strong ongoing performance."
+    }
+  ]
+}
