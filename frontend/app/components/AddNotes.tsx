@@ -2,6 +2,7 @@
 
 import { Mic, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Waveform } from "./Waveform";
 
 type Status = "idle" | "recording" | "review";
 
@@ -97,6 +98,8 @@ export function AddNotes() {
 
   return (
     <section className="flex flex-col items-center gap-4">
+      <Waveform active={status === "recording"} />
+
       {status === "idle" ? (
         <button
           type="button"
