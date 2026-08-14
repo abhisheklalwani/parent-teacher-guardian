@@ -28,7 +28,7 @@ function LogoMark() {
         strokeWidth="1.9"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="size-4"
+        className="size-5"
       >
         {/* Suspension cables: edge to tower, sagging between the towers */}
         <path d="M2 9.5C4.9 9.5 7 7.4 7 4" />
