@@ -5,9 +5,23 @@ import { useEffect, useRef } from "react";
 const BAR_COUNT = 56;
 const BAR_GAP = 3;
 const MIN_BAR_HEIGHT = 3;
+const SILENCE_RMS = 0.02;
+const SPEAKING_RMS = 0.04;
+const QUIET_AFTER_MS = 1600;
 
-export function Waveform({ active }: { active: boolean }) {
+export function Waveform({
+  active,
+  onQuietChange,
+}: {
+  active: boolean;
+  onQuietChange?: (quiet: boolean) => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const onQuietChangeRef = useRef(onQuietChange);
+
+  useEffect(() => {
+    onQuietChangeRef.current = onQuietChange;
+  });
 
   useEffect(() => {
     if (!active) return;
@@ -22,9 +36,42 @@ export function Waveform({ active }: { active: boolean }) {
     let audioContext: AudioContext | null = null;
     let analyser: AnalyserNode | null = null;
     let bins: Uint8Array<ArrayBuffer> | null = null;
+    let samples: Uint8Array<ArrayBuffer> | null = null;
+    let quiet = false;
+    let quietSince: number | null = null;
     const smoothed = new Array<number>(BAR_COUNT).fill(0);
     const start = performance.now();
     const color = getComputedStyle(canvas).color;
+
+    function setQuiet(next: boolean) {
+      if (quiet === next) return;
+      quiet = next;
+      onQuietChangeRef.current?.(next);
+    }
+
+    function trackSilence(now: number) {
+      if (!analyser || !samples) return;
+      analyser.getByteTimeDomainData(samples);
+
+      let sumSquares = 0;
+      for (let i = 0; i < samples.length; i++) {
+        const deviation = (samples[i] - 128) / 128;
+        sumSquares += deviation * deviation;
+      }
+      const rms = Math.sqrt(sumSquares / samples.length);
+
+      if (rms > SPEAKING_RMS) {
+        quietSince = null;
+        setQuiet(false);
+        return;
+      }
+      // Levels between the two thresholds hold the current state so a breath
+      // between sentences does not flip it back and forth.
+      if (rms > SILENCE_RMS) return;
+
+      quietSince ??= now;
+      if (now - quietSince >= QUIET_AFTER_MS) setQuiet(true);
+    }
 
     function barTarget(index: number, now: number) {
       if (bins) {
@@ -46,6 +93,7 @@ export function Waveform({ active }: { active: boolean }) {
       if (stopped || !canvas || !context) return;
 
       if (analyser && bins) analyser.getByteFrequencyData(bins);
+      trackSilence(now);
 
       const ratio = window.devicePixelRatio || 1;
       const width = canvas.clientWidth;
@@ -98,6 +146,7 @@ export function Waveform({ active }: { active: boolean }) {
         analyser.smoothingTimeConstant = 0.75;
         audioContext.createMediaStreamSource(micStream).connect(analyser);
         bins = new Uint8Array(analyser.frequencyBinCount);
+        samples = new Uint8Array(analyser.fftSize);
       } catch {
         // Mic blocked or unavailable: the synthetic animation stands in.
       }
@@ -109,6 +158,7 @@ export function Waveform({ active }: { active: boolean }) {
     return () => {
       stopped = true;
       cancelAnimationFrame(frame);
+      setQuiet(false);
       stream?.getTracks().forEach((track) => track.stop());
       void audioContext?.close();
     };
