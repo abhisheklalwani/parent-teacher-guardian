@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Clock, Mail, Mic, Sprout } from "lucide-react";
+import { Clock, Info, Mail, Mic, Sprout } from "lucide-react";
 import { useSyncExternalStore } from "react";
 import {
   BASELINE_SEEDS,
@@ -35,11 +35,37 @@ export default function Home() {
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Welcome, {TEACHER_NAME}
           </h1>
-          <p className="inline-flex max-w-md flex-wrap items-center justify-center gap-x-1.5 text-muted-foreground">
+          <p className="inline-flex max-w-lg flex-wrap items-center justify-center gap-x-1.5 text-muted-foreground">
             <span>You&apos;ve planted</span>
             <span className="inline-flex items-center gap-1 font-semibold text-success">
               <Sprout aria-hidden="true" className="size-4" strokeWidth={2} />
               {seeds} {seeds === 1 ? "seed" : "seeds"} of positive culture
+            </span>
+            <span className="group relative inline-flex">
+              <button
+                type="button"
+                aria-label="About seeds of positive culture"
+                className="inline-flex cursor-pointer rounded-full text-success/80 transition-colors hover:text-success focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Info aria-hidden="true" className="size-4" strokeWidth={2} />
+              </button>
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 flex w-72 -translate-x-1/2 flex-col gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-left text-xs font-normal leading-5 text-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
+              >
+                <span>
+                  Every time you send positive feedback about a student, it
+                  plants a seed of positive culture in your classroom.
+                </span>
+                <span>
+                  These small actions can have an outsized impact on your
+                  students.
+                </span>
+                <span className="italic">
+                  Plus, it makes it easier to have hard conversations with parents
+                  later if needed!
+                </span>
+              </span>
             </span>
           </p>
         </header>
