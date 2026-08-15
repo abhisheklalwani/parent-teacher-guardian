@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { plantSeed } from "@/lib/seeds";
 import type { Suggestion } from "@/lib/suggestions";
 import { SuggestionCard } from "./SuggestionCard";
@@ -13,47 +13,67 @@ export function SuggestionsList() {
   const [errorDetail, setErrorDetail] = useState<string | null>(null);
   const [approvedIds, setApprovedIds] = useState<string[]>([]);
   const [skippedIds, setSkippedIds] = useState<string[]>([]);
+  const [regenerating, setRegenerating] = useState(false);
+
+  const load = useCallback(async (opts?: { refresh?: boolean }) => {
+    const refresh = opts?.refresh === true;
+    setState("loading");
+    setErrorDetail(null);
+    if (refresh) setRegenerating(true);
+
+    try {
+      const url = refresh
+        ? "/api/suggestions?refresh=1"
+        : "/api/suggestions";
+      const res = await fetch(url);
+      const data: { suggestions?: Suggestion[]; error?: string } =
+        await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.error ?? `Request failed: ${res.status}`);
+      }
+      setSuggestions(data.suggestions ?? []);
+      if (refresh) {
+        setApprovedIds([]);
+        setSkippedIds([]);
+      }
+      setState("loaded");
+    } catch (error) {
+      setErrorDetail(
+        error instanceof Error ? error.message : "Request failed",
+      );
+      setState("error");
+    } finally {
+      setRegenerating(false);
+    }
+  }, []);
 
   useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      try {
-        const res = await fetch("/api/suggestions");
-        const data: { suggestions?: Suggestion[]; error?: string } =
-          await res.json().catch(() => ({}));
-        if (!res.ok) {
-          throw new Error(data.error ?? `Request failed: ${res.status}`);
-        }
-        if (cancelled) return;
-        setSuggestions(data.suggestions ?? []);
-        setState("loaded");
-      } catch (error) {
-        if (!cancelled) {
-          setErrorDetail(
-            error instanceof Error ? error.message : "Request failed",
-          );
-          setState("error");
-        }
-      }
-    }
-
     void load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  }, [load]);
 
   const visible = suggestions.filter((s) => !skippedIds.includes(s.id));
   const remaining = visible.filter((s) => !approvedIds.includes(s.id)).length;
 
   return (
     <section className="flex flex-col gap-4">
-      {state === "loaded" && (
-        <p className="text-sm text-muted-foreground">
-          {remaining} waiting on you
-        </p>
+      {(state === "loaded" || state === "error") && (
+        <div className="flex items-center justify-between gap-3">
+          {state === "loaded" ? (
+            <p className="text-sm text-muted-foreground">
+              {remaining} waiting on you
+            </p>
+          ) : (
+            <span />
+          )}
+          <button
+            type="button"
+            onClick={() => void load({ refresh: true })}
+            disabled={regenerating}
+            className="text-sm text-muted-foreground underline-offset-2 hover:underline disabled:opacity-50"
+          >
+            {regenerating ? "Regenerating…" : "Regenerate"}
+          </button>
+        </div>
       )}
 
       {state === "loading" && (
