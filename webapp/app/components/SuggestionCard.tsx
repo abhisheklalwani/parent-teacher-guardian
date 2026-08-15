@@ -38,6 +38,7 @@ export function SuggestionCard({
   onApprove,
   onSkip,
 }: SuggestionCardProps) {
+  const [subject, setSubject] = useState(suggestion.subject);
   const [draft, setDraft] = useState(suggestion.draft);
   const [copied, setCopied] = useState(false);
   const [sendState, setSendState] = useState<"idle" | "sending" | "error">(
@@ -48,7 +49,9 @@ export function SuggestionCard({
 
   async function copyDraft() {
     try {
-      await navigator.clipboard.writeText(draft);
+      await navigator.clipboard.writeText(
+        `Subject: ${subject}\n\n${draft}`,
+      );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -66,7 +69,7 @@ export function SuggestionCard({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           to: suggestion.guardianEmail,
-          subject: suggestion.subject,
+          subject,
           text: draft,
         }),
       });
@@ -114,9 +117,16 @@ export function SuggestionCard({
       </ul>
 
       <div className="flex flex-col gap-2">
-        <p className="text-sm font-medium text-foreground">
-          Subject: {suggestion.subject}
-        </p>
+        <label className="flex flex-col gap-1 text-sm">
+          <span className="font-medium text-foreground">Subject</span>
+          <input
+            type="text"
+            value={subject}
+            onChange={(event) => setSubject(event.target.value)}
+            disabled={isApproved}
+            className="rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </label>
         <label className="flex flex-col gap-1 text-sm">
           <span className="sr-only">Draft message</span>
           <textarea
