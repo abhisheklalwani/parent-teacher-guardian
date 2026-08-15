@@ -65,6 +65,8 @@ export async function processVoiceNote(
   const roster = loadRoster();
   const audioBase64 = Buffer.from(audio).toString("base64");
 
+  console.log("Audio model: ", GEMINI_MODEL);
+
   const transcription = await client.models.generateContent({
     model: GEMINI_MODEL,
     contents: [
