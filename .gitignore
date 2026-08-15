@@ -4,3 +4,6 @@ node_modules/
 .env*
 !.env.example
 api_key.env
+
+# stale build cache from the pre-rename frontend/ directory (now webapp/)
+frontend/.next/
