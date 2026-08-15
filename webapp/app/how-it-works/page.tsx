@@ -22,8 +22,7 @@ export default async function HowItWorksPage() {
         </h1>
         <p className="max-w-2xl text-muted-foreground">
           BridgeAI turns class records and teacher observations into suggested
-          parent outreach. These are the inputs for {rosterData.class.name},
-          Period {rosterData.class.period}.
+          parent outreach.
         </p>
       </header>
 
