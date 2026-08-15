@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ClipboardCheck, ListChecks, Mail, Mic, Newspaper, Users } from "lucide-react";
+import { ClipboardCheck, CircleHelp, ListChecks, Mail, Mic, Newspaper, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ComponentType } from "react";
 
@@ -17,6 +17,12 @@ const NAV_ITEMS: {
     { href: "/newsletter", label: "Newsletter", Icon: Newspaper },
     { href: "/for-families", label: "For Families", Icon: Users },
   ];
+
+const BOTTOM_NAV_ITEM = {
+  href: "/how-it-works",
+  label: "How it works",
+  Icon: CircleHelp,
+};
 
 function LogoMark() {
   return (
