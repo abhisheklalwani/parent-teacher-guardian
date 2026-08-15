@@ -227,7 +227,7 @@ export function AddNotes({ children }: { children?: ReactNode }) {
             <button
               type="button"
               onClick={() => void startRecording()}
-              className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Mic aria-hidden="true" className="size-3.5" strokeWidth={2} />
               Record again
@@ -256,7 +256,7 @@ export function AddNotes({ children }: { children?: ReactNode }) {
                       type="button"
                       onClick={() => removeNote(item.student_id)}
                       aria-label={`Remove note for ${item.student_name}`}
-                      className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="cursor-pointer rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <Trash2 aria-hidden="true" className="size-4" />
                     </button>
@@ -288,7 +288,7 @@ export function AddNotes({ children }: { children?: ReactNode }) {
                 notes.every((item) => item.note.trim().length === 0) ||
                 savedAt !== null
               }
-              className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               Save notes
             </button>
@@ -326,7 +326,7 @@ export function AddNotes({ children }: { children?: ReactNode }) {
             <button
               type="button"
               onClick={() => void startRecording()}
-              className="inline-flex items-center gap-3 rounded-full bg-primary px-10 py-5 text-lg font-medium text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex cursor-pointer items-center gap-3 rounded-full bg-primary px-10 py-5 text-lg font-medium text-primary-foreground shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Mic aria-hidden="true" className="size-6" strokeWidth={1.75} />
               Start recording
@@ -335,7 +335,7 @@ export function AddNotes({ children }: { children?: ReactNode }) {
             <button
               type="button"
               onClick={stopRecording}
-              className="inline-flex items-center gap-3 rounded-full border border-border bg-muted px-10 py-5 text-lg font-medium text-foreground shadow-sm transition-colors hover:bg-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex cursor-pointer items-center gap-3 rounded-full border border-border bg-muted px-10 py-5 text-lg font-medium text-foreground shadow-sm transition-colors hover:bg-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <Square
                 aria-hidden="true"
