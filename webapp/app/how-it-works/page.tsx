@@ -1,16 +1,17 @@
 import gradebookData from "@/data/gradebook.json";
 import attendanceData from "@/data/attendance.json";
-import teacherNotesData from "@/data/teacher_notes.json";
 import rosterData from "@/data/roster.json";
 import { Mic, RefreshCw } from "lucide-react";
 import { AttendanceSection } from "./components/AttendanceSection";
 import { GradebookSection } from "./components/GradebookSection";
 import { TeacherNotesSection } from "./components/TeacherNotesSection";
+import { getTeacherNotes } from "@/lib/teacher-notes-store";
 
-export default function HowItWorksPage() {
+export default async function HowItWorksPage() {
   const nameById = Object.fromEntries(
     rosterData.students.map((s) => [s.student_id, s.name]),
   );
+  const teacherNotes = await getTeacherNotes();
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-6 py-12 font-sans">
@@ -41,7 +42,7 @@ export default function HowItWorksPage() {
             />
             <span>
               Gradebook scores and attendance are pulled from the
-              school&apos;s SIS. <i>(for demo purposes, we're using mock data.)</i>
+              school&apos;s SIS. <i>(for demo purposes, we&apos;re using mock data.)</i>
             </span>
           </p>
           <p className="flex items-start gap-2 text-sm ml-4">
@@ -70,8 +71,8 @@ export default function HowItWorksPage() {
         />
 
         <TeacherNotesSection
-          teacher={teacherNotesData.teacher}
-          notes={teacherNotesData.notes}
+          teacher={teacherNotes.teacher}
+          notes={teacherNotes.notes}
           nameById={nameById}
         />
       </section>

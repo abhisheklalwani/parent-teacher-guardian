@@ -1,11 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
-import { readFile, rename, writeFile } from "node:fs/promises";
-import path from "node:path";
+import rosterData from "@/data/roster.json";
+import {
+  CLASS_ID,
+  insertTeacherNotes,
+} from "@/lib/teacher-notes-store";
 
 const GEMINI_MODEL = "gemini-3.5-flash";
-const DATA_DIR = path.join(process.cwd(), "data");
-const ROSTER_PATH = path.join(DATA_DIR, "roster.json");
-const NOTES_PATH = path.join(DATA_DIR, "teacher_notes.json");
 
 type Student = {
   student_id: string;
@@ -14,19 +14,6 @@ type Student = {
 
 type RosterData = {
   students: Student[];
-};
-
-type NotesData = {
-  class_id: string;
-  teacher: string;
-  notes: {
-    student_id: string;
-    entries: {
-      date: string;
-      week_of?: string;
-      note: string;
-    }[];
-  }[];
 };
 
 export type ParsedVoiceNote = {
@@ -52,8 +39,8 @@ Task:
 
 Return a JSON array only. Each item must have "student_id" and "note" string fields.`;
 
-async function loadRoster(): Promise<RosterData> {
-  return JSON.parse(await readFile(ROSTER_PATH, "utf8")) as RosterData;
+function loadRoster(): RosterData {
+  return rosterData as RosterData;
 }
 
 function getClient(): GoogleGenAI {
@@ -75,7 +62,7 @@ export async function processVoiceNote(
   mimeType: string,
 ): Promise<{ transcript: string; notes: ParsedVoiceNote[] }> {
   const client = getClient();
-  const roster = await loadRoster();
+  const roster = loadRoster();
   const audioBase64 = Buffer.from(audio).toString("base64");
 
   const transcription = await client.models.generateContent({
@@ -146,22 +133,10 @@ export async function processVoiceNote(
   return { transcript, notes };
 }
 
-function weekOf(date: Date): string {
-  const monday = new Date(date);
-  const day = monday.getUTCDay();
-  monday.setUTCDate(monday.getUTCDate() - ((day + 6) % 7));
-  return monday.toISOString().slice(0, 10);
-}
-
 export async function saveVoiceNotes(
   notes: { student_id: string; note: string }[],
 ): Promise<{ count: number; date: string; week_of: string }> {
-  const [roster, notesData] = await Promise.all([
-    loadRoster(),
-    readFile(NOTES_PATH, "utf8").then(
-      (contents) => JSON.parse(contents) as NotesData,
-    ),
-  ]);
+  const roster = loadRoster();
   const validStudentIds = new Set(
     roster.students.map((student) => student.student_id),
   );
@@ -179,29 +154,5 @@ export async function saveVoiceNotes(
     throw new Error("Notes must contain a valid student and non-empty text");
   }
 
-  const now = new Date();
-  const date = now.toISOString().slice(0, 10);
-  const week = weekOf(now);
-  const entriesById = new Map(
-    notesData.notes.map((student) => [student.student_id, student.entries]),
-  );
-
-  for (const item of cleaned) {
-    const entry = { date, week_of: week, note: item.note };
-    const entries = entriesById.get(item.student_id);
-    if (entries) {
-      entries.push(entry);
-    } else {
-      notesData.notes.push({
-        student_id: item.student_id,
-        entries: [entry],
-      });
-    }
-  }
-
-  const temporaryPath = `${NOTES_PATH}.tmp`;
-  await writeFile(temporaryPath, `${JSON.stringify(notesData, null, 2)}\n`);
-  await rename(temporaryPath, NOTES_PATH);
-
-  return { count: cleaned.length, date, week_of: week };
+  return insertTeacherNotes(cleaned, { classId: CLASS_ID });
 }
