@@ -10,9 +10,10 @@ type Tab = {
 
 type Props = {
   tabs: Tab[];
+  label?: string;
 };
 
-export function InputDataTabs({ tabs }: Props) {
+export function InputDataTabs({ tabs, label = "Input data" }: Props) {
   const [activeId, setActiveId] = useState(tabs[0]?.id);
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -66,7 +67,7 @@ export function InputDataTabs({ tabs }: Props) {
       <div
         ref={listRef}
         role="tablist"
-        aria-label="Input data"
+        aria-label={label}
         className="relative flex overflow-x-auto border-b border-border"
       >
         {tabs.map((tab) => {
