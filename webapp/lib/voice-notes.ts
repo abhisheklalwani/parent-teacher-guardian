@@ -5,7 +5,7 @@ import {
   insertTeacherNotes,
 } from "@/lib/teacher-notes-store";
 
-const GEMINI_MODEL = "gemini-3.5-flash";
+const GEMINI_MODEL = "gemini-3.7-flash";
 
 type Student = {
   student_id: string;
