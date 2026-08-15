@@ -5,6 +5,7 @@ import { Mic, RefreshCw } from "lucide-react";
 import { AttendanceSection } from "./components/AttendanceSection";
 import { GradebookSection } from "./components/GradebookSection";
 import { TeacherNotesSection } from "./components/TeacherNotesSection";
+import { InputDataTabs } from "./components/InputDataTabs";
 import { getTeacherNotes } from "@/lib/teacher-notes-store";
 
 export default async function HowItWorksPage() {
@@ -58,22 +59,42 @@ export default async function HowItWorksPage() {
           </p>
         </div>
 
-        <GradebookSection
-          assignments={gradebookData.assignments}
-          grades={gradebookData.grades}
-          nameById={nameById}
-        />
-
-        <AttendanceSection
-          reportingPeriod={attendanceData.reporting_period}
-          records={attendanceData.records}
-          nameById={nameById}
-        />
-
-        <TeacherNotesSection
-          teacher={teacherNotes.teacher}
-          notes={teacherNotes.notes}
-          nameById={nameById}
+        <InputDataTabs
+          tabs={[
+            {
+              id: "gradebook",
+              label: "Gradebook",
+              content: (
+                <GradebookSection
+                  assignments={gradebookData.assignments}
+                  grades={gradebookData.grades}
+                  nameById={nameById}
+                />
+              ),
+            },
+            {
+              id: "attendance",
+              label: "Attendance",
+              content: (
+                <AttendanceSection
+                  reportingPeriod={attendanceData.reporting_period}
+                  records={attendanceData.records}
+                  nameById={nameById}
+                />
+              ),
+            },
+            {
+              id: "teacher-notes",
+              label: "Teacher notes",
+              content: (
+                <TeacherNotesSection
+                  teacher={teacherNotes.teacher}
+                  notes={teacherNotes.notes}
+                  nameById={nameById}
+                />
+              ),
+            },
+          ]}
         />
       </section>
     </main>

@@ -32,22 +32,11 @@ export function AttendanceSection({
   nameById,
 }: Props) {
   return (
-    <section
-      className="flex flex-col gap-3"
-      aria-labelledby="attendance-heading"
-    >
-      <div className="flex flex-col gap-1">
-        <h3
-          id="attendance-heading"
-          className="text-lg font-semibold tracking-tight text-foreground"
-        >
-          Attendance data
-        </h3>
-        <p className="text-sm text-muted-foreground">
-          Reporting period {reportingPeriod.start} to {reportingPeriod.end} (
-          {reportingPeriod.total_days} school days).
-        </p>
-      </div>
+    <div className="flex flex-col gap-3">
+      <p className="text-sm text-muted-foreground">
+        Reporting period {reportingPeriod.start} to {reportingPeriod.end} (
+        {reportingPeriod.total_days} school days).
+      </p>
 
       <div className="overflow-x-auto rounded-md border border-border bg-card/80">
         <table className="min-w-full border-collapse text-left text-sm">
@@ -116,6 +105,6 @@ export function AttendanceSection({
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
   );
 }
