@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Mic } from "lucide-react";
+import { ClipboardCheck, ListChecks, Mail, Mic, Newspaper, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ComponentType } from "react";
 import { TEACHER_NAME } from "@/lib/seeds";
@@ -13,6 +13,10 @@ const NAV_ITEMS: {
 }[] = [
     { href: "/notes", label: "Add Notes", Icon: Mic },
     { href: "/outreach", label: "Outreach", Icon: Mail },
+    { href: "/syllabus", label: "This Week", Icon: ClipboardCheck },
+    { href: "/homework", label: "Homework Updates", Icon: ListChecks },
+    { href: "/newsletter", label: "Newsletter", Icon: Newspaper },
+    { href: "/for-families", label: "For Families", Icon: Users },
   ];
 
 function LogoMark() {
