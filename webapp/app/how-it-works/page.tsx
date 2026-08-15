@@ -11,6 +11,10 @@ import { VoiceNotePipeline } from "./components/VoiceNotePipeline";
 import { buildPromptInstructions } from "@/lib/generate-messages";
 import { getTeacherNotes } from "@/lib/teacher-notes-store";
 
+// Teacher notes are written from /notes at any time, so this page cannot be
+// prerendered or served from the client cache.
+export const dynamic = "force-dynamic";
+
 export default async function HowItWorksPage() {
   const nameById = Object.fromEntries(
     rosterData.students.map((s) => [s.student_id, s.name]),
