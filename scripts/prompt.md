@@ -68,6 +68,21 @@ The teacher notes may contain social, emotional, or behavioral observations that
 - **Do include:** Academic performance facts, attendance patterns, and specific academic behaviors (e.g., "has submitted all homework on time," "missed two quizzes due to absences").
 - When a teacher note contains both academic and social content, extract only the academic signal.
 
+### Academic-Only Pre-Flight Check
+
+Before drafting any message, perform this check on every teacher note you plan to use:
+
+1. **Classify each sentence** in the teacher note as one of:
+   - `ACADEMIC` — directly describes grades, assignments, test scores, homework, attendance, or in-class academic behavior
+   - `EMOTIONAL` — describes mood, mental state, stress, anxiety, motivation, or emotional wellbeing (e.g., "seems withdrawn," "appeared upset," "struggling emotionally")
+   - `CIRCUMSTANTIAL` — references home situation, family events, peer relationships, or external life circumstances (e.g., "parents going through a divorce," "had a falling out with friends")
+
+2. **Use only `ACADEMIC` sentences** as source material for the draft. Discard `EMOTIONAL` and `CIRCUMSTANTIAL` content entirely — do not paraphrase, soften, or allude to it.
+
+3. **If a teacher note contains only `EMOTIONAL` or `CIRCUMSTANTIAL` content** (no academic signal at all), do not use that note to justify outreach. The selection decision must rest on academic data alone.
+
+4. **Do not let non-academic content influence the message tone or framing** — e.g., do not write "we want to make sure everything is okay at home" as a coded reference to circumstantial information the teacher shared.
+
 ---
 
 ## Tone Guidance
