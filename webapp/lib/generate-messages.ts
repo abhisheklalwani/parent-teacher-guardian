@@ -12,7 +12,7 @@ import {
   type TeacherNotes,
 } from "@/lib/teacher-notes-store";
 
-const GEMINI_MODEL = "gemini-3.6-flash";
+const GEMINI_MODEL = "gemini-3.7-flash";
 
 type ClassInfo = {
   name: string;
