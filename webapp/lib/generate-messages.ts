@@ -239,18 +239,34 @@ function fillTemplate(
   return filled;
 }
 
+function withPreflight(template: string): string {
+  return template.replace(
+    "\n\n---\n\n## Tone Guidance",
+    `\n\n${ACADEMIC_ONLY_PREFLIGHT}\n\n---\n\n## Tone Guidance`,
+  );
+}
+
 export function buildPrompt(
   snapshots: StudentSnapshot[],
   roster: Roster,
   attendance: Attendance,
 ): string {
-  const template = OUTREACH_PROMPT_TEMPLATE.replace(
-    "\n\n---\n\n## Tone Guidance",
-    `\n\n${ACADEMIC_ONLY_PREFLIGHT}\n\n---\n\n## Tone Guidance`,
+  const instruction = fillTemplate(
+    withPreflight(OUTREACH_PROMPT_TEMPLATE),
+    roster,
+    attendance,
   );
-  const instruction = fillTemplate(template, roster, attendance);
   const dataBlock = JSON.stringify({ students: snapshots }, null, 2);
   return `${instruction}\n\n## Student Data\n\n\`\`\`json\n${dataBlock}\n\`\`\`\n`;
+}
+
+/** The filled instruction block sent to Gemini, without the per-student data. */
+export function buildPromptInstructions(): string {
+  return fillTemplate(
+    withPreflight(OUTREACH_PROMPT_TEMPLATE),
+    rosterData as Roster,
+    attendanceData as Attendance,
+  );
 }
 
 function extractJson(raw: string): GenerateMessagesResult {
