@@ -44,7 +44,6 @@ export default async function HowItWorksPage() {
           step={1}
           title="Data automatically syncs from the school's existing systems"
           summary="Gradebook and attendance records arrive without the teacher entering anything."
-          defaultOpen
         >
           <InputDataTabs
             label="Synced data"
