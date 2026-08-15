@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ClipboardCheck, ListChecks, Mail, Mic, Newspaper, Users } from "lucide-react";
+import { ClipboardCheck, ListChecks, Mail, Mic, Newspaper, Users, CircleHelp } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ComponentType } from "react";
+
 
 const NAV_ITEMS: {
   href: string;
@@ -17,6 +18,12 @@ const NAV_ITEMS: {
     { href: "/newsletter", label: "Newsletter", Icon: Newspaper },
     { href: "/for-families", label: "For Families", Icon: Users },
   ];
+
+const BOTTOM_NAV_ITEM = {
+  href: "/how-it-works",
+  label: "How it works",
+  Icon: CircleHelp,
+};
 
 function LogoMark() {
   return (
@@ -59,11 +66,10 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-        isActive
-          ? "bg-primary text-primary-foreground"
-          : "text-muted-foreground hover:bg-muted hover:text-foreground"
-      }`}
+      className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isActive
+        ? "bg-primary text-primary-foreground"
+        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+        }`}
     >
       <Icon className="size-4 shrink-0" />
       {label}
