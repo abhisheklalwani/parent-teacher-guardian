@@ -40,8 +40,8 @@ export default function HowItWorksPage() {
               strokeWidth={2}
             />
             <span>
-              Gradebook scores and attendance would be pulled from the
-              school&apos;s SIS.
+              Gradebook scores and attendance are pulled from the
+              school&apos;s SIS. <i>(for demo purposes, we're using mock data.)</i>
             </span>
           </p>
           <p className="flex items-start gap-2 text-sm ml-4">
