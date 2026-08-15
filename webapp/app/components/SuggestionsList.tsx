@@ -10,6 +10,7 @@ type LoadState = "loading" | "loaded" | "error";
 export function SuggestionsList() {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [state, setState] = useState<LoadState>("loading");
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
   const [approvedIds, setApprovedIds] = useState<string[]>([]);
   const [skippedIds, setSkippedIds] = useState<string[]>([]);
 
@@ -19,13 +20,21 @@ export function SuggestionsList() {
     async function load() {
       try {
         const res = await fetch("/api/suggestions");
-        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
-        const data: { suggestions: Suggestion[] } = await res.json();
+        const data: { suggestions?: Suggestion[]; error?: string } =
+          await res.json().catch(() => ({}));
+        if (!res.ok) {
+          throw new Error(data.error ?? `Request failed: ${res.status}`);
+        }
         if (cancelled) return;
-        setSuggestions(data.suggestions);
+        setSuggestions(data.suggestions ?? []);
         setState("loaded");
-      } catch {
-        if (!cancelled) setState("error");
+      } catch (error) {
+        if (!cancelled) {
+          setErrorDetail(
+            error instanceof Error ? error.message : "Request failed",
+          );
+          setState("error");
+        }
       }
     }
 
@@ -69,7 +78,7 @@ export function SuggestionsList() {
             Could not load suggestions
           </p>
           <p className="mt-1 text-muted-foreground">
-            Refresh the page to try again.
+            {errorDetail ?? "Refresh the page to try again."}
           </p>
         </div>
       )}

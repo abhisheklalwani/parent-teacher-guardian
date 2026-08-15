@@ -1,19 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, Mic } from "lucide-react";
+import { CircleHelp, Mail, Mic } from "lucide-react";
 import { usePathname } from "next/navigation";
 import type { ComponentType } from "react";
-import { TEACHER_NAME } from "@/lib/seeds";
 
 const NAV_ITEMS: {
   href: string;
   label: string;
   Icon: ComponentType<{ className?: string }>;
 }[] = [
-    { href: "/notes", label: "Add Notes", Icon: Mic },
-    { href: "/outreach", label: "Outreach", Icon: Mail },
-  ];
+  { href: "/notes", label: "Add Notes", Icon: Mic },
+  { href: "/outreach", label: "Outreach", Icon: Mail },
+];
+
+const BOTTOM_NAV_ITEM = {
+  href: "/how-it-works",
+  label: "How it works",
+  Icon: CircleHelp,
+};
 
 function LogoMark() {
   return (
@@ -42,11 +47,40 @@ function LogoMark() {
   );
 }
 
+function NavLink({
+  href,
+  label,
+  Icon,
+  isActive,
+}: {
+  href: string;
+  label: string;
+  Icon: ComponentType<{ className?: string }>;
+  isActive: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        isActive
+          ? "bg-primary text-primary-foreground"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+      }`}
+    >
+      <Icon className="size-4 shrink-0" />
+      {label}
+    </Link>
+  );
+}
+
 export function SideNav() {
   const pathname = usePathname();
+  const isHowItWorksActive =
+    pathname === BOTTOM_NAV_ITEM.href ||
+    pathname.startsWith(`${BOTTOM_NAV_ITEM.href}/`);
 
   return (
-    <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-card/70 backdrop-blur-sm">
+    <aside className="sticky top-0 flex h-screen w-56 shrink-0 flex-col self-start border-r border-border bg-card/70 backdrop-blur-sm">
       <div className="border-b border-border px-4 py-5">
         <Link
           href="/"
@@ -61,25 +95,36 @@ export function SideNav() {
         </Link>
       </div>
 
-      <nav className="flex flex-col gap-1 p-3" aria-label="Main">
+      <nav
+        className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto p-3"
+        aria-label="Main"
+      >
         {NAV_ITEMS.map((item) => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
-            <Link
+            <NavLink
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-            >
-              <item.Icon className="size-4 shrink-0" />
-              {item.label}
-            </Link>
+              label={item.label}
+              Icon={item.Icon}
+              isActive={isActive}
+            />
           );
         })}
+      </nav>
+
+      <nav
+        className="mt-auto border-t border-border p-3"
+        aria-label="About"
+      >
+        <NavLink
+          href={BOTTOM_NAV_ITEM.href}
+          label={BOTTOM_NAV_ITEM.label}
+          Icon={BOTTOM_NAV_ITEM.Icon}
+          isActive={isHowItWorksActive}
+        />
       </nav>
     </aside>
   );
