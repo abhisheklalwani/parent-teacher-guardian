@@ -1,5 +1,6 @@
 "use client";
 
+import { Copy, Send } from "lucide-react";
 import { useState } from "react";
 import type { OutreachType, Suggestion } from "@/lib/suggestions";
 
@@ -83,7 +84,7 @@ export function SuggestionCard({
   }
 
   return (
-    <article className="flex flex-col gap-4 rounded-lg border border-border bg-card p-5 text-card-foreground shadow-sm">
+    <article className="flex h-full flex-col gap-4 rounded-lg border border-border bg-card p-5 text-card-foreground shadow-sm">
       <header className="flex flex-col gap-2">
         <div className="flex items-start justify-between gap-3">
           <div className="flex min-w-0 flex-col">
@@ -130,25 +131,27 @@ export function SuggestionCard({
       </div>
 
       {isApproved ? (
-        <div className="rounded-md border border-success/30 bg-success/10 px-4 py-2 text-sm font-medium text-success">
+        <div className="mt-auto rounded-md border border-success/30 bg-success/10 px-4 py-2 text-sm font-medium text-success">
           Approved and sent
         </div>
       ) : (
-        <div className="flex flex-col gap-2">
+        <div className="mt-auto flex flex-col gap-2">
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={approveAndSend}
               disabled={sendState === "sending"}
-              className="cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
+              <Send aria-hidden="true" className="size-3.5" strokeWidth={2} />
               {sendState === "sending" ? "Sending…" : "Approve & send"}
             </button>
             <button
               type="button"
               onClick={copyDraft}
-              className="cursor-pointer rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
+              <Copy aria-hidden="true" className="size-3.5" strokeWidth={2} />
               {copied ? "Copied" : "Copy"}
             </button>
             <button
