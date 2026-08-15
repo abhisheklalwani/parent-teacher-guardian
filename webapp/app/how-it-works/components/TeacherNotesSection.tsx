@@ -1,3 +1,4 @@
+import { Mic } from "lucide-react";
 type NoteEntry = {
   date: string;
   note: string;
@@ -17,8 +18,16 @@ type Props = {
 export function TeacherNotesSection({ teacher, notes, nameById }: Props) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-sm text-muted-foreground">
-        Observations from {teacher}, grouped by student after capture.
+      <p className="flex items-start gap-2 text-sm ml-4">
+        <Mic
+          aria-hidden="true"
+          className="mt-0.5 size-3.5 shrink-0"
+          strokeWidth={2}
+        />
+        <span>
+          Generated automatically from the teacher&apos;s weekly
+          ~3 minute &quot;brain dump&quot; voice recording.
+        </span>
       </p>
 
       {notes.length === 0 ? (
