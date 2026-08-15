@@ -271,7 +271,7 @@ export async function callGemini(prompt: string): Promise<string> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error(
-      "GEMINI_API_KEY is not set. Add it to frontend/.env.local.",
+      "GEMINI_API_KEY is not set. Add it to webapp/.env.local.",
     );
   }
 
