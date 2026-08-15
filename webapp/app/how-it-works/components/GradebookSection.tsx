@@ -1,3 +1,5 @@
+import { RefreshCw } from "lucide-react";
+
 type Assignment = {
   id: string;
   type: string;
@@ -25,21 +27,21 @@ function formatScore(score: number | null | undefined) {
 
 export function GradebookSection({ assignments, grades, nameById }: Props) {
   return (
-    <section
-      className="flex flex-col gap-3"
-      aria-labelledby="gradebook-heading"
-    >
-      <div className="flex flex-col gap-1">
-        <h3
-          id="gradebook-heading"
-          className="text-lg font-semibold tracking-tight text-foreground"
-        >
-          Gradebook
-        </h3>
-        <p className="text-sm text-muted-foreground">
-          Assignment scores by student. Missing work is shown as a dash.
-        </p>
-      </div>
+    <div className="flex flex-col gap-3">
+      <p className="flex items-start gap-2 text-sm ml-4">
+        <RefreshCw
+          aria-hidden="true"
+          className="mt-0.5 size-3.5 shrink-0"
+          strokeWidth={2}
+        />
+        <span>
+          Synced automatically from the school&apos;s existing
+          data sources.{" "}
+          <i>
+            (mocked for this demo)
+          </i>
+        </span>
+      </p>
 
       <div className="overflow-x-auto rounded-md border border-border bg-card/80">
         <table className="min-w-full border-collapse text-left text-sm">
@@ -87,6 +89,6 @@ export function GradebookSection({ assignments, grades, nameById }: Props) {
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
   );
 }
