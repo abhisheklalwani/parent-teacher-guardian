@@ -1,0 +1,21 @@
+{
+  "class": {
+    "name": "Algebra II",
+    "period": 3,
+    "teacher": "Ms. Rivera",
+    "grade": 10,
+    "school_year": "2026-2027"
+  },
+  "students": [
+    { "student_id": "S01", "name": "Maya Chen" },
+    { "student_id": "S02", "name": "Jaylen Brooks" },
+    { "student_id": "S03", "name": "Ethan Whitfield" },
+    { "student_id": "S04", "name": "Sofia Ramirez" },
+    { "student_id": "S05", "name": "Marcus Bell" },
+    { "student_id": "S06", "name": "Aaliyah Foster" },
+    { "student_id": "S07", "name": "Noah Kaplan" },
+    { "student_id": "S08", "name": "Grace Thompson" },
+    { "student_id": "S09", "name": "Diego Alvarez" },
+    { "student_id": "S10", "name": "Priya Patel" }
+  ]
+}
