@@ -42,8 +42,12 @@ echo "Verifying installation..."
 conda run --name "$ENV_NAME" python - <<'PYEOF'
 import sys
 from google import genai  # noqa: F401
+import numpy  # noqa: F401
+import sounddevice  # noqa: F401
 print(f"  Python {sys.version.split()[0]} ✓")
 print(f"  google-genai ✓")
+print(f"  numpy ✓")
+print(f"  sounddevice ✓")
 PYEOF
 
 # ── 4. API key reminder ──────────────────────────────────────────────────────
@@ -55,6 +59,24 @@ if [ ! -f "api_key.env" ]; then
 fi
 
 echo ""
-echo "Setup complete. To run the message generator:"
+echo "Setup complete."
+echo ""
+echo "To run the message generator:"
 echo "  conda activate ${ENV_NAME}"
 echo "  python scripts/generate_messages.py"
+echo ""
+echo "To run the speech-to-text listener (raw STT, for testing):"
+echo "  conda activate ${ENV_NAME}"
+echo "  python stt_test_file.py"
+echo ""
+echo "To capture weekly teacher voice notes:"
+echo "  conda activate ${ENV_NAME}"
+echo "  python scripts/voice_notes.py"
+echo ""
+echo "  Speak freely about your students. The full recording is transcribed"
+echo "  and an LLM pass splits it into per-student notes matched to the roster."
+echo "  Press Ctrl+C when done speaking, then confirm to save."
+echo ""
+echo "  Optional flags:"
+echo "    --threshold 0.02   raise if background noise triggers recording"
+echo "    --silence 1.0      shorten pause needed to end an utterance"
