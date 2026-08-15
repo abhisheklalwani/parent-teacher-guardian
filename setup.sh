@@ -42,8 +42,12 @@ echo "Verifying installation..."
 conda run --name "$ENV_NAME" python - <<'PYEOF'
 import sys
 from google import genai  # noqa: F401
+import numpy  # noqa: F401
+import sounddevice  # noqa: F401
 print(f"  Python {sys.version.split()[0]} ✓")
 print(f"  google-genai ✓")
+print(f"  numpy ✓")
+print(f"  sounddevice ✓")
 PYEOF
 
 # ── 4. API key reminder ──────────────────────────────────────────────────────
@@ -55,6 +59,17 @@ if [ ! -f "api_key.env" ]; then
 fi
 
 echo ""
-echo "Setup complete. To run the message generator:"
+echo "Setup complete."
+echo ""
+echo "To run the message generator:"
 echo "  conda activate ${ENV_NAME}"
 echo "  python scripts/generate_messages.py"
+echo ""
+echo "To run the speech-to-text listener:"
+echo "  conda activate ${ENV_NAME}"
+echo "  python stt_test_file.py"
+echo ""
+echo "  Optional flags:"
+echo "    --threshold 0.02   raise if background noise triggers recording"
+echo "    --silence 1.0      seconds of silence before cutting off an utterance"
+echo "    --model gemini-3.5-flash  override the Gemini model"
