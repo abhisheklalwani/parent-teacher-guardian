@@ -4,7 +4,10 @@ import rosterData from "@/data/roster.json";
 import gradebookData from "@/data/gradebook.json";
 import attendanceData from "@/data/attendance.json";
 import teacherNotesData from "@/data/teacher_notes.json";
-import { OUTREACH_PROMPT_TEMPLATE } from "@/lib/outreach-prompt";
+import {
+  ACADEMIC_ONLY_PREFLIGHT,
+  OUTREACH_PROMPT_TEMPLATE,
+} from "@/lib/outreach-prompt";
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 
@@ -244,7 +247,11 @@ export function buildPrompt(
   roster: Roster,
   attendance: Attendance,
 ): string {
-  const instruction = fillTemplate(OUTREACH_PROMPT_TEMPLATE, roster, attendance);
+  const template = OUTREACH_PROMPT_TEMPLATE.replace(
+    "\n\n---\n\n## Tone Guidance",
+    `\n\n${ACADEMIC_ONLY_PREFLIGHT}\n\n---\n\n## Tone Guidance`,
+  );
+  const instruction = fillTemplate(template, roster, attendance);
   const dataBlock = JSON.stringify({ students: snapshots }, null, 2);
   return `${instruction}\n\n## Student Data\n\n\`\`\`json\n${dataBlock}\n\`\`\`\n`;
 }

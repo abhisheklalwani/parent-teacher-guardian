@@ -11,9 +11,11 @@ const QUIET_AFTER_MS = 1600;
 
 export function Waveform({
   active,
+  stream,
   onQuietChange,
 }: {
   active: boolean;
+  stream: MediaStream | null;
   onQuietChange?: (quiet: boolean) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -32,7 +34,6 @@ export function Waveform({
 
     let stopped = false;
     let frame = 0;
-    let stream: MediaStream | null = null;
     let audioContext: AudioContext | null = null;
     let analyser: AnalyserNode | null = null;
     let bins: Uint8Array<ArrayBuffer> | null = null;
@@ -131,24 +132,17 @@ export function Waveform({
     }
 
     async function connectMicrophone() {
+      if (!stream) return;
       try {
-        const micStream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-        });
-        if (stopped) {
-          micStream.getTracks().forEach((track) => track.stop());
-          return;
-        }
-        stream = micStream;
         audioContext = new AudioContext();
         analyser = audioContext.createAnalyser();
         analyser.fftSize = 1024;
         analyser.smoothingTimeConstant = 0.75;
-        audioContext.createMediaStreamSource(micStream).connect(analyser);
+        audioContext.createMediaStreamSource(stream).connect(analyser);
         bins = new Uint8Array(analyser.frequencyBinCount);
         samples = new Uint8Array(analyser.fftSize);
       } catch {
-        // Mic blocked or unavailable: the synthetic animation stands in.
+        // The synthetic animation remains visible if audio analysis is unavailable.
       }
     }
 
@@ -159,10 +153,9 @@ export function Waveform({
       stopped = true;
       cancelAnimationFrame(frame);
       setQuiet(false);
-      stream?.getTracks().forEach((track) => track.stop());
       void audioContext?.close();
     };
-  }, [active]);
+  }, [active, stream]);
 
   if (!active) return null;
 
