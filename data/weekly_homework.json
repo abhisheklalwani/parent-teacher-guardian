@@ -1,0 +1,36 @@
+{
+  "class_id": "ALG2-P3-2627",
+  "week_of": "2026-08-17",
+  "assignments": [
+    {
+      "day": "Monday",
+      "title": "Section 1.1 Practice: Adding & Subtracting Polynomials",
+      "due_date": "2026-08-17",
+      "instructions": "Complete problems 1-15 in the workbook."
+    },
+    {
+      "day": "Tuesday",
+      "title": "Factoring Basics Worksheet",
+      "due_date": "2026-08-18",
+      "instructions": "Front and back; show your work for full credit."
+    },
+    {
+      "day": "Wednesday",
+      "title": "Khan Academy: Factoring by Grouping",
+      "due_date": "2026-08-19",
+      "instructions": "Watch the video and complete the practice set (about 20 minutes)."
+    },
+    {
+      "day": "Thursday",
+      "title": "Quiz 1 Review Packet",
+      "due_date": "2026-08-20",
+      "instructions": "Review packet covers polynomials and factoring basics ahead of Friday's quiz."
+    },
+    {
+      "day": "Friday",
+      "title": "No new homework — Quiz 1 in class",
+      "due_date": "2026-08-21",
+      "instructions": "Study factoring methods covered this week."
+    }
+  ]
+}

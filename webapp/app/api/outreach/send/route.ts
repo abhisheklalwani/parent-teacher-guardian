@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import { getEmailConfig, sendEmail } from "@/lib/email";
 
 type SendOutreachBody = {
   to: string;
@@ -26,11 +26,8 @@ function isValidBody(body: unknown): body is SendOutreachBody {
  * triggers automatically.
  */
 export async function POST(request: Request) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL;
-  const testRecipient = process.env.RESEND_TEST_RECIPIENT_EMAIL;
-
-  if (!apiKey || !from) {
+  const config = getEmailConfig();
+  if (!config) {
     return Response.json(
       { error: "Email sending is not configured (missing RESEND_API_KEY or RESEND_FROM_EMAIL)" },
       { status: 501 },
@@ -45,28 +42,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const resend = new Resend(apiKey);
-  const { to, subject, text } = body;
-
-  // Demo/test mode: every send is redirected to a single inbox instead of the
-  // (synthetic, non-deliverable) guardian address, so the intended recipient
-  // is called out in the subject and body for visibility during a demo.
-  const recipient = testRecipient || to;
-  const demoSubject = testRecipient ? `[demo -> ${to}] ${subject}` : subject;
-  const demoText = testRecipient
-    ? `(This is a demo send. Intended guardian recipient: ${to})\n\n${text}`
-    : text;
-
-  const { data, error } = await resend.emails.send({
-    from,
-    to: recipient,
-    subject: demoSubject,
-    text: demoText,
-  });
-
-  if (error) {
-    return Response.json({ error: error.message }, { status: 502 });
+  const result = await sendEmail(config, body);
+  if (!result.ok) {
+    return Response.json({ error: result.error }, { status: 502 });
   }
 
-  return Response.json({ id: data?.id });
+  return Response.json({ id: result.id });
 }
