@@ -3,8 +3,14 @@ import type { OutreachType, Suggestion } from "@/lib/suggestions";
 import rosterData from "@/data/roster.json";
 import gradebookData from "@/data/gradebook.json";
 import attendanceData from "@/data/attendance.json";
-import teacherNotesData from "@/data/teacher_notes.json";
-import { OUTREACH_PROMPT_TEMPLATE } from "@/lib/outreach-prompt";
+import {
+  ACADEMIC_ONLY_PREFLIGHT,
+  OUTREACH_PROMPT_TEMPLATE,
+} from "@/lib/outreach-prompt";
+import {
+  getTeacherNotes,
+  type TeacherNotes,
+} from "@/lib/teacher-notes-store";
 
 const GEMINI_MODEL = "gemini-3.6-flash";
 
@@ -51,13 +57,6 @@ type Attendance = {
     absences_excused: number;
     absences_unexcused: number;
     tardies: number;
-  }[];
-};
-
-type TeacherNotes = {
-  notes: {
-    student_id: string;
-    entries: { date: string; note: string }[];
   }[];
 };
 
@@ -109,17 +108,18 @@ export type GenerateMessagesResult = {
   students_not_contacted: SkippedStudent[];
 };
 
-export function loadClassData(): {
+export async function loadClassData(): Promise<{
   roster: Roster;
   gradebook: Gradebook;
   attendance: Attendance;
   teacherNotes: TeacherNotes;
-} {
+}> {
+  const teacherNotes = await getTeacherNotes();
   return {
     roster: rosterData as Roster,
     gradebook: gradebookData as Gradebook,
     attendance: attendanceData as Attendance,
-    teacherNotes: teacherNotesData as TeacherNotes,
+    teacherNotes,
   };
 }
 
@@ -244,7 +244,11 @@ export function buildPrompt(
   roster: Roster,
   attendance: Attendance,
 ): string {
-  const instruction = fillTemplate(OUTREACH_PROMPT_TEMPLATE, roster, attendance);
+  const template = OUTREACH_PROMPT_TEMPLATE.replace(
+    "\n\n---\n\n## Tone Guidance",
+    `\n\n${ACADEMIC_ONLY_PREFLIGHT}\n\n---\n\n## Tone Guidance`,
+  );
+  const instruction = fillTemplate(template, roster, attendance);
   const dataBlock = JSON.stringify({ students: snapshots }, null, 2);
   return `${instruction}\n\n## Student Data\n\n\`\`\`json\n${dataBlock}\n\`\`\`\n`;
 }
@@ -292,7 +296,7 @@ export async function generateMessages(): Promise<{
   result: GenerateMessagesResult;
   snapshots: StudentSnapshot[];
 }> {
-  const { roster, gradebook, attendance, teacherNotes } = loadClassData();
+  const { roster, gradebook, attendance, teacherNotes } = await loadClassData();
   const snapshots = buildStudentSnapshots(
     roster,
     gradebook,

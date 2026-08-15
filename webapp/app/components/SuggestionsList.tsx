@@ -69,7 +69,7 @@ export function SuggestionsList() {
             type="button"
             onClick={() => void load({ refresh: true })}
             disabled={regenerating}
-            className="text-sm text-muted-foreground underline-offset-2 hover:underline disabled:opacity-50"
+            className="cursor-pointer text-sm text-muted-foreground underline-offset-2 hover:underline disabled:cursor-not-allowed disabled:opacity-50"
           >
             {regenerating ? "Regenerating…" : "Regenerate"}
           </button>

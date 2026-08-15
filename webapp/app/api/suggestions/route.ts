@@ -1,14 +1,12 @@
-import gradebookData from "@/data/gradebook.json";
 import { generateMessages, toSuggestions } from "@/lib/generate-messages";
 import {
   getLatestSuggestions,
   saveSuggestions,
 } from "@/lib/outreach-store";
+import { CLASS_ID } from "@/lib/teacher-notes-store";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
-
-const CLASS_ID = gradebookData.class_id;
 
 /**
  * GET /api/suggestions -> suggested parent communications for the current week.
